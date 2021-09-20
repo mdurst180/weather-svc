@@ -1,10 +1,16 @@
 import os
-from flask import Flask, request, jsonify
 import requests
 
+from flask import Flask, request, jsonify
+from flask_caching import Cache  # Import Cache from flask_caching module
+
+
 app = Flask(__name__)
+app.config.from_object('config.Config')  # Set the configuration variables to the flask application
+cache = Cache(app)  # Initialize Cache
 
 @app.route("/universities")
+@cache.cached(timeout=30, query_string=True)
 def get_universities():
     API_URL = "http://universities.hipolabs.com/search?country="
     search = request.args.get('country')
