@@ -1,7 +1,15 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
+import requests
 
 app = Flask(__name__)
+
+@app.route("/universities")
+def get_universities():
+    API_URL = "http://universities.hipolabs.com/search?country="
+    search = request.args.get('country')
+    r = requests.get(f"{API_URL}{search}")
+    return jsonify(r.json())
 
 @app.route('/')
 def hello():
