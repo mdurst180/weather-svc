@@ -9,7 +9,7 @@ services:
     ports:
       - '5000:5000'
   redis:
-    image: redis
+    image: redis:alpine
     container_name: redis-container
     ports:
       - "6379:6379"
