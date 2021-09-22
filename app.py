@@ -12,18 +12,18 @@ cache = Cache(app)  # Initialize Cache
 @app.route("/universities")
 @cache.cached(timeout=30, query_string=True)
 def get_universities():
-    API_URL = "http://universities.hipolabs.com/search?country="
-    search = request.args.get('country')
-    r = requests.get(f"{API_URL}{search}")
-    return jsonify(r.json())
+  API_URL = "http://universities.hipolabs.com/search?country="
+  search = request.args.get('country')
+  r = requests.get(f"{API_URL}{search}")
+  return jsonify(r.json())
 
 @app.route("/weather")
 @cache.cached(timeout=30, query_string=True)
 def get_weather():
-    API_URL = "https://api.openweathermap.org/data/2.5/onecall"
-    payload = {'appid': app.config.get("WEATHER_APP_ID"), 'lat': '39.952583', 'lon': '-75.165222'}
-    r = requests.get(f"{API_URL}", params=payload)
-    return jsonify(r.json())
+  API_URL = "https://api.openweathermap.org/data/2.5/onecall"
+  payload = {'appid': app.config.get("WEATHER_APP_ID"), 'lat': '39.952583', 'lon': '-75.165222'}
+  r = requests.get(f"{API_URL}", params=payload)
+  return jsonify(r.json())
 
 @app.route('/')
 def hello():
