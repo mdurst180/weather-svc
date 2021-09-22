@@ -20,9 +20,9 @@ def get_universities():
 @app.route("/weather")
 @cache.cached(timeout=30, query_string=True)
 def get_weather():
-    API_URL = "https://api.openweathermap.org/data/2.5/onecall?lat=39.952583&lon=-75.165222&appid=13819fee3b7b78e11e82afd4ec86728e"
-    # search = request.args.get()
-    r = requests.get(f"{API_URL}")
+    API_URL = "https://api.openweathermap.org/data/2.5/onecall"
+    payload = {'appid': app.config.get("WEATHER_APP_ID"), 'lat': '39.952583', 'lon': '-75.165222'}
+    r = requests.get(f"{API_URL}", params=payload)
     return jsonify(r.json())
 
 @app.route('/')
