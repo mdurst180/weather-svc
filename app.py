@@ -22,6 +22,8 @@ def get_universities():
 def get_weather():
   API_URL = "https://api.openweathermap.org/data/2.5/onecall"
   payload = {'appid': app.config.get("WEATHER_APP_ID"), 'lat': '39.952583', 'lon': '-75.165222'}
+  print('test')
+  print(app.config)
   print(app.config.get("WEATHER_APP_ID"))
   r = requests.get(f"{API_URL}", params=payload)
   return jsonify(r.json())
