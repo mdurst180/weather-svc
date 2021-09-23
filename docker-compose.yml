@@ -11,12 +11,10 @@ services:
   worker:
     build: .
     command: python worker.py
-    environment:
-      DEBUG: 1
+    env_file:
+      - .env
     volumes:
       - .:/app
-    depends_on:
-      - api
   redis:
     image: redis:alpine
     container_name: redis-container

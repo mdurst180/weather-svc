@@ -2,3 +2,6 @@ build:
   docker:
     web: Dockerfile
     worker: worker/Dockerfile
+run:
+  web: python app.py
+  worker: python worker.py
