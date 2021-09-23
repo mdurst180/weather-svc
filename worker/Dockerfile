@@ -6,4 +6,4 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-# CMD ["python", "worker.py"]
+CMD ["python", "worker.py"]
