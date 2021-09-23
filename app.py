@@ -21,7 +21,7 @@ def get_universities():
 @cache.cached(timeout=30, query_string=True)
 def get_weather():
   API_URL = "https://api.openweathermap.org/data/2.5/onecall"
-  payload = {'appid': app.config.get("WEATHER_APP_ID"), 'lat': '39.952583', 'lon': '-75.165222'}
+  payload = {'appid': os.environ['WEATHER_APP_ID'], 'lat': '39.952583', 'lon': '-75.165222'}
   print('test')
   print(app.config)
   print(app.config.get("WEATHER_APP_ID"))
