@@ -25,11 +25,13 @@ def get_universities():
 def get_weather():
   API_URL = "https://api.openweathermap.org/data/2.5/onecall"
   payload = {'appid': os.environ['WEATHER_APP_ID'], 'lat': '39.952583', 'lon': '-75.165222'}
+  
+  city = request.args.get('city')
 
   r = requests.get(f"{API_URL}", params=payload)
 
   loop = asyncio.get_event_loop()
-  weather = loop.run_until_complete(getweather("Philadelphia"))
+  weather = loop.run_until_complete(getweather(city))
 
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
