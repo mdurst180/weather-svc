@@ -39,7 +39,8 @@ def get_weather():
 
   return jsonify({
     'city': city,
-    'current_temp': weather.current.temperature
+    'current_temp': weather.current.temperature,
+    'feels_like': weather.current.feels_like,
   })
 
 @app.route('/')
