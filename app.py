@@ -37,7 +37,7 @@ def get_weather():
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
 
-  return jsonify(json.dumps(weather.current))
+  return jsonify({'current_temp': weather.current.temperature})
 
 @app.route('/')
 def hello():
