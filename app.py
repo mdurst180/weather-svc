@@ -38,7 +38,7 @@ def get_weather():
 
 @app.route('/')
 def hello():
-  return "Hello World!"
+  return "Hello Worl!"
 
 async def getweather():
   # declare the client. format defaults to metric system (celcius, km/h, etc.)
