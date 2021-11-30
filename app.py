@@ -30,7 +30,7 @@ def get_weather():
 
   loop = asyncio.get_event_loop()
   weather = loop.run_until_complete(getweather())
-  
+
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
 
@@ -45,7 +45,7 @@ async def getweather():
   client = python_weather.Client(format=python_weather.IMPERIAL)
 
   # fetch a weather forecast from a city
-  weather = await client.find("Washington DC")
+  weather = await client.find("Philadelphia")
 
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
