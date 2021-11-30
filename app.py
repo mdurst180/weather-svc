@@ -23,12 +23,12 @@ def get_universities():
 @app.route("/weather")
 @cache.cached(timeout=30, query_string=True)
 def get_weather():
-  API_URL = "https://api.openweathermap.org/data/2.5/onecall"
-  payload = {'appid': os.environ['WEATHER_APP_ID'], 'lat': '39.952583', 'lon': '-75.165222'}
+  # API_URL = "https://api.openweathermap.org/data/2.5/onecall"
+  # payload = {'appid': os.environ['WEATHER_APP_ID'], 'lat': '39.952583', 'lon': '-75.165222'}
   
   city = request.args.get('city')
 
-  r = requests.get(f"{API_URL}", params=payload)
+  # r = requests.get(f"{API_URL}", params=payload)
 
   loop = asyncio.get_event_loop()
   weather = loop.run_until_complete(getweather(city))
@@ -36,7 +36,7 @@ def get_weather():
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
 
-  return jsonify(r.json())
+  return jsonify(weather.json())
 
 @app.route('/')
 def hello():
