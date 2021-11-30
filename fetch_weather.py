@@ -30,7 +30,7 @@ _email = "mdurst180@gmail.com"
 _pword = os.environ['MAIL']
 _msg = "Dummy msg"
 _subj = "Dummy subj"
-coro = send_txt.send_txt(_num, _carrier, _email, _pword, _msg, _subj)
+# coro = send_txt.send_txt(_num, _carrier, _email, _pword, _msg, _subj)
 # _nums = {"999999999", "000000000"}
 # coro = send_txts(_nums, _carrier, _email, _pword, _msg, _subj)
-asyncio.run(coro)
+# asyncio.run(coro)
