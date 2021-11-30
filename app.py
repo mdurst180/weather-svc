@@ -29,7 +29,7 @@ def get_weather():
   r = requests.get(f"{API_URL}", params=payload)
 
   loop = asyncio.get_event_loop()
-  weather = loop.run_until_complete(getweather())
+  weather = loop.run_until_complete(getweather("Philadelphia"))
 
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
@@ -38,14 +38,14 @@ def get_weather():
 
 @app.route('/')
 def hello():
-  return "Hello Worl!"
+  return "Hello World!"
 
-async def getweather():
+async def getweather(city):
   # declare the client. format defaults to metric system (celcius, km/h, etc.)
   client = python_weather.Client(format=python_weather.IMPERIAL)
 
   # fetch a weather forecast from a city
-  weather = await client.find("Philadelphia")
+  weather = await client.find(city)
 
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
