@@ -4,9 +4,10 @@ import requests
 from flask import Flask, request, jsonify
 from flask_caching import Cache  # Import Cache from flask_caching module
 
-import python_weather
 import asyncio
+
 import json
+import weather
 
 
 app = Flask(__name__)
@@ -32,40 +33,20 @@ def get_weather():
   # r = requests.get(f"{API_URL}", params=payload)
 
   loop = asyncio.get_event_loop()
-  weather = loop.run_until_complete(getweather(city))
+  current_weather = loop.run_until_complete(weather.getweather(city))
 
   # returns the current day's forecast temperature (int)
-  print(weather.current.temperature)
+  print(current_weather.current.temperature)
 
   return jsonify({
     'city': city,
-    'current_temp': weather.current.temperature,
-    'feels_like': weather.current.feels_like,
+    'current_temp': current_weather.current.temperature,
+    'feels_like': current_weather.current.feels_like,
   })
 
 @app.route('/')
 def hello():
   return "Hello World!"
-
-async def getweather(city):
-  # declare the client. format defaults to metric system (celcius, km/h, etc.)
-  client = python_weather.Client(format=python_weather.IMPERIAL)
-
-  # fetch a weather forecast from a city
-  weather = await client.find(city)
-
-  # returns the current day's forecast temperature (int)
-  print(weather.current.temperature)
-
-  # get the weather forecast for a few days
-  for forecast in weather.forecasts:
-      print(str(forecast.date), forecast.sky_text, forecast.temperature)
-
-  # close the wrapper once done
-  await client.close()
-
-  return weather
-
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
