@@ -4,6 +4,9 @@ import requests
 from flask import Flask, request, jsonify
 from flask_caching import Cache  # Import Cache from flask_caching module
 
+import python_weather
+import asyncio
+
 
 app = Flask(__name__)
 app.config.from_object('config.Config')  # Set the configuration variables to the flask application
@@ -24,6 +27,16 @@ def get_weather():
   payload = {'appid': os.environ['WEATHER_APP_ID'], 'lat': '39.952583', 'lon': '-75.165222'}
 
   r = requests.get(f"{API_URL}", params=payload)
+
+  # declare the client. format defaults to metric system (celcius, km/h, etc.)
+  client = python_weather.Client(format=python_weather.IMPERIAL)
+
+  # fetch a weather forecast from a city
+  weather = client.find("Washington DC")
+
+  # returns the current day's forecast temperature (int)
+  print(weather.current.temperature)
+
   return jsonify(r.json())
 
 @app.route('/')
