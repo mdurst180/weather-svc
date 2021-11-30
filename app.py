@@ -6,6 +6,7 @@ from flask_caching import Cache  # Import Cache from flask_caching module
 
 import python_weather
 import asyncio
+import json
 
 
 app = Flask(__name__)
@@ -36,7 +37,7 @@ def get_weather():
   # returns the current day's forecast temperature (int)
   print(weather.current.temperature)
 
-  return jsonify(weather.json())
+  return jsonify(json.dumps(weather))
 
 @app.route('/')
 def hello():
